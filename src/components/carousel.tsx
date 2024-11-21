@@ -22,34 +22,16 @@ const slides = [
 ];
 
 export default function Carousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const Prev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
-    );
-  };
-
-  const Next = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-    );
-  };
 
   return (
     <div className="relative w-full flex justify-center items-center overflow-hidden">
       <div
-        className="flex transition-all duration-500"
-        style={{
-          transform: `translateX(-${currentIndex * 100}%)`,
-          width: `${slides.length * 100}%`,
-        }}
+        className="flex transition-all duration-500 gap-5"
       >
         {slides.map((slide, index) => (
           <div
             key={index}
-            className="flex-shrink-0 mx-4"
-            style={{ width: "900px", height: "550px" }}
+            className="flex-shrink-0 mx-4 w-[850px] h-[500px] relative"
           >
             <div className="relative w-full h-full rounded-lg overflow-hidden shadow-lg group hover:bg-green-200 transition-all duration-500">
               <Image
@@ -61,27 +43,26 @@ export default function Carousel() {
               <div className="absolute bottom-5 inset-x-0 bg-opacity-50 flex flex-col justify-center items-center text-white duration-300 group-hover:opacity-100 transition-transform transform group-hover:translate-y-[-40px] translate-y-10">
                 <h2 className="text-2xl font-bold">{slide.title}</h2>
                 <p className="mt-2 text-center mb-3">{slide.description}</p>
-                <p className="opacity-0 group-hover:opacity-100">
+                <p className="opacity-0 group-hover:opacity-100 text-center">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus sint deleniti minus illo cupiditate dolore mollitia.
                 </p>
               </div>
             </div>
+            {index === 1 && <>
+              <button
+                className="bg-black w-[40px] h-[40px] absolute top-1/2 -left-11 transform -translate-y-1/2 text-white p-3 rounded-full shadow-lg z-10 flex justify-center items-center"
+              >
+                ←
+              </button>
+              <button
+                className="bg-black w-[40px] h-[40px] absolute top-1/2 -right-11 transform -translate-y-1/2 text-white p-3 rounded-full shadow-lg z-10 flex justify-center items-center"
+              >
+                →
+              </button>
+            </>}
           </div>
         ))}
       </div>
-
-      <button
-        onClick={Prev}
-        className="bg-gray-800 absolute top-1/2 left-0 transform -translate-y-1/2 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 z-10"
-      >
-        ←
-      </button>
-      <button
-        onClick={Next}
-        className="bg-gray-800 absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 z-10"
-      >
-        →
-      </button>
     </div>
   );
 }
