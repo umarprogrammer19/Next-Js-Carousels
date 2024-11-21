@@ -24,13 +24,13 @@ const slides = [
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handlePrev = () => {
+  const Prev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? slides.length - 1 : prevIndex - 1
     );
   };
 
-  const handleNext = () => {
+  const Next = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === slides.length - 1 ? 0 : prevIndex + 1
     );
@@ -38,9 +38,8 @@ export default function Carousel() {
 
   return (
     <div className="relative w-full flex justify-center items-center overflow-hidden">
-      {/* Carousel Container */}
       <div
-        className="flex transition-transform duration-500"
+        className="flex transition-all duration-500"
         style={{
           transform: `translateX(-${currentIndex * 100}%)`,
           width: `${slides.length * 100}%`,
@@ -49,24 +48,21 @@ export default function Carousel() {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className="flex-shrink-0 mx-12"
+            className="flex-shrink-0 mx-4"
             style={{ width: "900px", height: "550px" }}
           >
             <div className="relative w-full h-full rounded-lg overflow-hidden shadow-lg group hover:bg-green-200 transition-all duration-500">
-              {/* Image with dimming effect on hover */}
               <Image
                 src={slide.image}
                 alt={slide.title}
                 fill
                 className="object-cover transition-all duration-500 group-hover:opacity-50"
               />
-              {/* Content container */}
-              <div className="absolute bottom-5 inset-x-0 bg-opacity-50 flex flex-col justify-center items-center text-white duration-300  group-hover:opacity-100 transition-transform transform group-hover:translate-y-[-40px] translate-y-10">
+              <div className="absolute bottom-5 inset-x-0 bg-opacity-50 flex flex-col justify-center items-center text-white duration-300 group-hover:opacity-100 transition-transform transform group-hover:translate-y-[-40px] translate-y-10">
                 <h2 className="text-2xl font-bold">{slide.title}</h2>
                 <p className="mt-2 text-center mb-3">{slide.description}</p>
-                <p className=" opacity-0 group-hover:opacity-100">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Ducimus sint deleniti minus illo cupiditate dolore mollitia.
+                <p className="opacity-0 group-hover:opacity-100">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus sint deleniti minus illo cupiditate dolore mollitia.
                 </p>
               </div>
             </div>
@@ -74,15 +70,14 @@ export default function Carousel() {
         ))}
       </div>
 
-      {/* Navigation Buttons */}
       <button
-        onClick={handlePrev}
+        onClick={Prev}
         className="bg-gray-800 absolute top-1/2 left-0 transform -translate-y-1/2 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 z-10"
       >
         ←
       </button>
       <button
-        onClick={handleNext}
+        onClick={Next}
         className="bg-gray-800 absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 z-10"
       >
         →
